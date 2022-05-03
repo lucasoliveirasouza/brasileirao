@@ -1,4 +1,6 @@
 import 'package:brasileirao/controllers/home_controller.dart';
+import 'package:brasileirao/models/time.dart';
+import 'package:brasileirao/views/time/time.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
       body: ListView.separated(
         itemCount: controller.tabela.length,
         itemBuilder: (BuildContext contexto, int i) {
-          final tabela = controller.tabela;
+          final List<Time> tabela = controller.tabela;
           return ListTile(
             leading: SizedBox(
               height: 40,
@@ -32,6 +34,13 @@ class _HomeViewState extends State<HomeView> {
             ),
             title: Text(tabela[i].nome),
             trailing: Text(tabela[i].pontos.toString()),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          TimeView(key: Key(tabela[i].nome), time: tabela[i])));
+            },
           );
         },
         separatorBuilder: (_, __) => Divider(),
