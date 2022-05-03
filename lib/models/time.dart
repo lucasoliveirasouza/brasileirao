@@ -6,7 +6,7 @@ class Time {
   String brasao;
   int pontos;
   Color cor;
-  List<Titulo> _titulos = [];
+  List<Titulo> titulos = [];
 
   Time(
       {required this.nome,
@@ -15,6 +15,6 @@ class Time {
       required this.cor});
 
   addTitulo(Titulo titulo) {
-    _titulos.add(titulo);
+    titulos.add(titulo);
   }
 }

@@ -32,7 +32,7 @@ class TimesService {
         brasao:
             "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/2029.png&h=200&w=200",
         pontos: 66,
-        cor: Colors.green,
+        cor: Colors.green.shade800,
       ),
       Time(
         nome: "Atlético-GO",
