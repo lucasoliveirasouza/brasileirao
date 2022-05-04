@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Brasileirão',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: const HomeView(),
     );
   }
