@@ -2,7 +2,9 @@ import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/models/titulo.dart';
 import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/titulo/cadastrar_titulo.dart';
+import 'package:brasileirao/views/titulo/editar_titulo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class TimeView extends StatefulWidget {
@@ -23,12 +25,9 @@ class _TimeViewState extends State<TimeView> {
             actions: [
               IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CadastrarTituloView(
-                                time: widget.time,
-                              )));
+                  Get.to(() => CadastrarTituloView(
+                        time: widget.time,
+                      ));
                 },
                 icon: Icon(Icons.add),
               )
@@ -92,6 +91,12 @@ class _TimeViewState extends State<TimeView> {
                 leading: Icon(Icons.emoji_events),
                 title: Text(time.titulos[index].campeonato),
                 trailing: Text(time.titulos[index].ano),
+                onTap: () {
+                  Get.to(
+                    EditarTituloView(titulo: time.titulos[index]),
+                    fullscreenDialog: true,
+                  );
+                },
               );
             },
             separatorBuilder: (_, __) => Divider(),

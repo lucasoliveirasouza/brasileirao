@@ -3,6 +3,7 @@ import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/time/time.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,12 +41,8 @@ class _HomeViewState extends State<HomeView> {
                 subtitle: Text("Titulos: ${tabela[time].titulos.length}"),
                 trailing: Text(tabela[time].pontos.toString()),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TimeView(
-                              key: Key(tabela[time].nome),
-                              time: tabela[time])));
+                  Get.to(() => TimeView(
+                      key: Key(tabela[time].nome), time: tabela[time]));
                 },
               );
             },

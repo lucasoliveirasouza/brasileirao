@@ -1,35 +1,38 @@
-import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/models/titulo.dart';
 import 'package:brasileirao/service/time_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class CadastrarTituloView extends StatefulWidget {
-  Time time;
-  CadastrarTituloView({Key? key, required this.time}) : super(key: key);
+class EditarTituloView extends StatefulWidget {
+  Titulo titulo;
+  EditarTituloView({Key? key, required this.titulo}) : super(key: key);
 
   @override
-  State<CadastrarTituloView> createState() => _CadastrarTituloViewState();
+  State<EditarTituloView> createState() => _EditarTituloViewState();
 }
 
-class _CadastrarTituloViewState extends State<CadastrarTituloView> {
+class _EditarTituloViewState extends State<EditarTituloView> {
   final ano = TextEditingController();
   final campeonato = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  save() {
-    Provider.of<TimesService>(context, listen: false).addTitulo(
-      widget.time,
-      Titulo(
-        campeonato.text,
-        ano.text,
-      ),
+  void initState() {
+    super.initState();
+    ano.text = widget.titulo.ano;
+    campeonato.text = widget.titulo.campeonato;
+  }
+
+  editar() {
+    Provider.of<TimesService>(context, listen: false).editarTitulo(
+      widget.titulo,
+      ano.text,
+      campeonato.text,
     );
     Get.back();
     Get.snackbar(
       "Sucesso!",
-      "Título cadastrado",
+      "Título editado",
       backgroundColor: Colors.white,
     );
   }
@@ -38,7 +41,13 @@ class _CadastrarTituloViewState extends State<CadastrarTituloView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cadastrar um titulo"),
+        title: Text("Editar título"),
+        actions: [
+          IconButton(
+            onPressed: editar,
+            icon: Icon(Icons.check),
+          )
+        ],
       ),
       body: Form(
         key: formKey,
@@ -73,29 +82,6 @@ class _CadastrarTituloViewState extends State<CadastrarTituloView> {
                   return null;
                 },
               ),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                height: 50,
-                padding: EdgeInsets.only(right: 30, left: 30),
-                child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        save();
-                      }
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.check),
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text("Salvar"),
-                        )
-                      ],
-                    )),
-              )
             ],
           ),
         ),

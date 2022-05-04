@@ -14,6 +14,12 @@ class TimesService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void editarTitulo(Titulo titulo, String ano, String campeonato) {
+    titulo.ano = ano;
+    titulo.campeonato = campeonato;
+    notifyListeners();
+  }
+
   TimesService() {
     _times.addAll([
       Time(
