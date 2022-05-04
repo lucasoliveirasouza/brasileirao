@@ -1,7 +1,9 @@
 import 'package:brasileirao/controllers/home_controller.dart';
 import 'package:brasileirao/models/time.dart';
+import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/time/time.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -22,29 +24,35 @@ class _HomeViewState extends State<HomeView> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: ListView.separated(
-        itemCount: controller.tabela.length,
-        itemBuilder: (BuildContext contexto, int i) {
-          final List<Time> tabela = controller.tabela;
-          return ListTile(
-            leading: SizedBox(
-              height: 40,
-              width: 40,
-              child: Image.network(tabela[i].brasao),
-            ),
-            title: Text(tabela[i].nome),
-            trailing: Text(tabela[i].pontos.toString()),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          TimeView(key: Key(tabela[i].nome), time: tabela[i])));
+      body: Consumer<TimesService>(
+        builder: (context, repositorio, child) {
+          return ListView.separated(
+            itemCount: repositorio.times.length,
+            itemBuilder: (BuildContext contexto, int time) {
+              final List<Time> tabela = repositorio.times;
+              return ListTile(
+                leading: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: Image.network(tabela[time].brasao),
+                ),
+                title: Text(tabela[time].nome),
+                subtitle: Text("Titulos: ${tabela[time].titulos.length}"),
+                trailing: Text(tabela[time].pontos.toString()),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TimeView(
+                              key: Key(tabela[time].nome),
+                              time: tabela[time])));
+                },
+              );
             },
+            separatorBuilder: (_, __) => Divider(),
+            padding: EdgeInsets.all(16),
           );
         },
-        separatorBuilder: (_, __) => Divider(),
-        padding: EdgeInsets.all(16),
       ),
     );
   }

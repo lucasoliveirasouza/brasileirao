@@ -1,12 +1,12 @@
 import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/models/titulo.dart';
+import 'package:brasileirao/service/time_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CadastrarTituloView extends StatefulWidget {
   Time time;
-  ValueChanged<Titulo> onSave;
-  CadastrarTituloView({Key? key, required this.time, required this.onSave})
-      : super(key: key);
+  CadastrarTituloView({Key? key, required this.time}) : super(key: key);
 
   @override
   State<CadastrarTituloView> createState() => _CadastrarTituloViewState();
@@ -16,6 +16,21 @@ class _CadastrarTituloViewState extends State<CadastrarTituloView> {
   final ano = TextEditingController();
   final campeonato = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  save() {
+    Provider.of<TimesService>(context, listen: false).addTitulo(
+      widget.time,
+      Titulo(
+        campeonato.text,
+        ano.text,
+      ),
+    );
+    Navigator.pop(context);
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Salvo com sucesso")));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +79,7 @@ class _CadastrarTituloViewState extends State<CadastrarTituloView> {
                 child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        widget.onSave(Titulo(campeonato.text, ano.text));
+                        save();
                       }
                     },
                     child: Row(

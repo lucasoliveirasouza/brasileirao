@@ -1,7 +1,9 @@
 import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/models/titulo.dart';
+import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/titulo/cadastrar_titulo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TimeView extends StatefulWidget {
   Time time;
@@ -12,16 +14,6 @@ class TimeView extends StatefulWidget {
 }
 
 class _TimeViewState extends State<TimeView> {
-  addTitulo(Titulo titulo) {
-    setState(() {
-      widget.time.addTitulo(titulo);
-    });
-    Navigator.pop(context);
-
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Salvo com sucesso")));
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,7 +28,6 @@ class _TimeViewState extends State<TimeView> {
                       MaterialPageRoute(
                           builder: (context) => CadastrarTituloView(
                                 time: widget.time,
-                                onSave: this.addTitulo,
                               )));
                 },
                 icon: Icon(Icons.add),
@@ -85,8 +76,10 @@ class _TimeViewState extends State<TimeView> {
   }
 
   Widget titulos() {
-    final quantidade = widget.time.titulos.length;
-
+    final time = Provider.of<TimesService>(context)
+        .times
+        .firstWhere((t) => t.nome == widget.time.nome);
+    final quantidade = time.titulos.length;
     return quantidade == 0
         ? Container(
             child: Center(
@@ -97,8 +90,8 @@ class _TimeViewState extends State<TimeView> {
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 leading: Icon(Icons.emoji_events),
-                title: Text(widget.time.titulos[index].campeonato),
-                trailing: Text(widget.time.titulos[index].ano),
+                title: Text(time.titulos[index].campeonato),
+                trailing: Text(time.titulos[index].ano),
               );
             },
             separatorBuilder: (_, __) => Divider(),
