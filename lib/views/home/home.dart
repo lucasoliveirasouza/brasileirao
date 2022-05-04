@@ -3,6 +3,7 @@ import 'package:brasileirao/models/time.dart';
 import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/time/time.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +33,13 @@ class _HomeViewState extends State<HomeView> {
             itemBuilder: (BuildContext contexto, int time) {
               final List<Time> tabela = repositorio.times;
               return ListTile(
-                leading: SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Image.network(tabela[time].brasao),
+                leading: Image(
+                  width: 50,
+                  height: 50,
+                  image: Svg(
+                    tabela[time].brasao,
+                    source: SvgSource.network,
+                  ),
                 ),
                 title: Text(tabela[time].nome),
                 subtitle: Text("Titulos: ${tabela[time].titulos.length}"),

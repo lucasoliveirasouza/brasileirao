@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => TimesService(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => TimesService()),
+    ],
     child: MyApp(),
   ));
 }
@@ -20,10 +22,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Brasileirão',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
       home: const HomeView(),
     );
   }

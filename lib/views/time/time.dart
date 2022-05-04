@@ -4,6 +4,8 @@ import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/titulo/cadastrar_titulo.dart';
 import 'package:brasileirao/views/titulo/editar_titulo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -55,10 +57,9 @@ class _TimeViewState extends State<TimeView> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(20),
-                  child: Image.network(
-                    widget.time.brasao,
-                    width: 100,
-                    height: 100,
+                  child: Image(
+                    image: Svg(widget.time.brasao,
+                        source: SvgSource.network, color: Colors.transparent),
                   ),
                 ),
                 Text(
