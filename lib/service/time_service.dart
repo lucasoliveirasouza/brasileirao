@@ -36,7 +36,7 @@ class TimesService extends ChangeNotifier {
     if (response.statusCode == 200) {
       print("Entrei");
       final json = jsonDecode(response.body);
-      print(response.body);
+
       final List<dynamic> times = json;
 
       times.forEach((time) {
