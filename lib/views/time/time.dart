@@ -41,7 +41,7 @@ class _TimeViewState extends State<TimeView> {
               tabs: <Widget>[
                 Tab(
                   icon: Icon(Icons.stacked_bar_chart),
-                  text: "Estatística",
+                  text: "Estatísticas",
                 ),
                 Tab(
                   icon: Icon(Icons.emoji_events),
