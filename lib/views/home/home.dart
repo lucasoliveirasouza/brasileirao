@@ -26,21 +26,44 @@ class _HomeViewState extends State<HomeView> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: Consumer<TimesService>(
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: ListView(
+          children: [
+            Table(
+              children: [
+                TableRow(children: [
+                  Container(
+                    child: Text("Teste 1"),
+                  ),
+                  Container(
+                    child: Text("Teste 2"),
+                  ),
+                  Container(
+                    child: Text("Teste 2"),
+                  ),
+                ]),
+              ],
+            )
+          ],
+        ),
+      ),
+
+      /*Consumer<TimesService>(
         builder: (context, repositorio, child) {
           return ListView.separated(
             itemCount: repositorio.times.length,
             itemBuilder: (BuildContext contexto, int time) {
               final List<Time> tabela = repositorio.times;
               return ListTile(
-                /*leading: Image(
+                */ /*leading: Image(
                   width: 50,
                   height: 50,
                   image: Svg(
                     tabela[time].brasao,
                     source: SvgSource.network,
                   ),
-                ),*/
+                ),*/ /*
                 title: Text(tabela[time].nome),
                 trailing: Text(tabela[time].pontos.toString()),
                 onTap: () {
@@ -53,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
             padding: EdgeInsets.all(16),
           );
         },
-      ),
+      ),*/
     );
   }
 }
