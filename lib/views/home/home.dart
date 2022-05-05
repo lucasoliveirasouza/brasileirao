@@ -33,16 +33,15 @@ class _HomeViewState extends State<HomeView> {
             itemBuilder: (BuildContext contexto, int time) {
               final List<Time> tabela = repositorio.times;
               return ListTile(
-                leading: Image(
+                /*leading: Image(
                   width: 50,
                   height: 50,
                   image: Svg(
                     tabela[time].brasao,
                     source: SvgSource.network,
                   ),
-                ),
+                ),*/
                 title: Text(tabela[time].nome),
-                subtitle: Text("Titulos: ${tabela[time].titulos.length}"),
                 trailing: Text(tabela[time].pontos.toString()),
                 onTap: () {
                   Get.to(() => TimeView(

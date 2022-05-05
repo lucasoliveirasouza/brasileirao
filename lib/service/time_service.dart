@@ -45,7 +45,14 @@ class TimesService extends ChangeNotifier {
           nome: time['time']['nome_popular'],
           brasao: time['time']['escudo'],
           pontos: time["pontos"],
-          cor: Colors.green,
+          jogos: time["jogos"],
+          timeId: time['time']['time_id'],
+          vitorias: time["vitorias"],
+          empates: time["empates"],
+          derrotas: time["derrotas"],
+          golsPro: time["gols_pro"],
+          golsContra: time["gols_contra"],
+          saldoGols: time["saldo_gols"],
         );
         _times.add(tm);
       });

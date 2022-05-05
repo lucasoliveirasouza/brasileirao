@@ -1,5 +1,4 @@
 import 'package:brasileirao/models/time.dart';
-import 'package:brasileirao/models/titulo.dart';
 import 'package:brasileirao/service/time_service.dart';
 import 'package:brasileirao/views/titulo/cadastrar_titulo.dart';
 import 'package:brasileirao/views/titulo/editar_titulo.dart';
@@ -36,7 +35,6 @@ class _TimeViewState extends State<TimeView> {
             ],
             centerTitle: true,
             title: Text(widget.time.nome),
-            backgroundColor: widget.time.cor,
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -55,6 +53,14 @@ class _TimeViewState extends State<TimeView> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text("Jogos: ${widget.time.jogos}"),
+                Text("Vitorias: ${widget.time.vitorias}"),
+                Text("Id: ${widget.time.timeId}"),
+                Text("Empates: ${widget.time.empates}"),
+                Text("Derrotas: ${widget.time.derrotas}"),
+                Text("Gols pró: ${widget.time.golsPro}"),
+                Text("Gols contra: ${widget.time.golsContra}"),
+                Text("Saldo de gols: ${widget.time.saldoGols}"),
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Image(
