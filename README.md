@@ -1,6 +1,8 @@
 # Brasileirão
 
-#### Em andamento
-Este projeto encontra-se em andamento e tem por fim estudar o gerenciamento de estados com Provider e utilizando API do brasileirão.
-Como próximas atividades, será buscada na API as próximas partidas de cada time, além de detalhar as estatísticas de cada time
+Este projeto tem por fim estudar o gerenciamento de estados com Provider, utilizando API do brasileirão, buscando todas as informações do time no campeonato.
+O projeto também utilizou o Getx para gerenciamneto de rotas.
+
+
+
 
